@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.example</groupId>
@@ -14,7 +15,7 @@
         <java.version>1.8</java.version>
         <azure.functions.maven.plugin.version>1.22.0</azure.functions.maven.plugin.version>
         <azure.functions.java.library.version>2.2.0</azure.functions.java.library.version>
-        <functionAppName>azure-functions-track-metric-example</functionAppName>
+        <functionAppName>azure-functions-track-metric-example-a4</functionAppName>
     </properties>
 
     <dependencies>
@@ -27,6 +28,11 @@
             <groupId>com.microsoft.azure</groupId>
             <artifactId>applicationinsights-core</artifactId>
             <version>3.4.9</version>
+        </dependency>
+        <dependency>
+            <groupId>io.opentelemetry.instrumentation</groupId>
+            <artifactId>opentelemetry-instrumentation-annotations</artifactId>
+            <version>1.22.0</version>
         </dependency>
     </dependencies>
 
@@ -52,13 +58,13 @@
                     <!-- function app resource group -->
                     <resourceGroup>trstalna</resourceGroup>
                     <!-- function app service plan name -->
-                    <appServicePlanName>java-functions-app-service-plan</appServicePlanName>
+                    <appServicePlanName>java-functions-app-service-plan-a4</appServicePlanName>
                     <!-- function app region-->
                     <!-- refers https://github.com/microsoft/azure-maven-plugins/wiki/Azure-Functions:-Configuration-Details#supported-regions for all valid values -->
-                    <region>westus</region>
+                    <region>centralus</region>
                     <!-- function pricingTier, default to be consumption if not specified -->
                     <!-- refers https://github.com/microsoft/azure-maven-plugins/wiki/Azure-Functions:-Configuration-Details#supported-pricing-tiers for all valid values -->
-                    <!-- <pricingTier></pricingTier> -->
+<!--                    <pricingTier>P1V2</pricingTier>-->
                     <!-- Whether to disable application insights, default is false -->
                     <!-- refers https://github.com/microsoft/azure-maven-plugins/wiki/Azure-Functions:-Configuration-Details for all valid configurations for application insights-->
                     <!-- <disableAppInsights></disableAppInsights> -->
@@ -76,6 +82,10 @@
                             <!-- enable the Azure Functions / Application Insights Java agent integration -->
                             <name>APPLICATIONINSIGHTS_ENABLE_AGENT</name>
                             <value>true</value>
+                        </property>
+                        <property>
+                            <name>APPLICATIONINSIGHTS_SELF_DIAGNOSTICS_LEVEL</name>
+                            <value>debug</value>
                         </property>
                     </appSettings>
                 </configuration>
